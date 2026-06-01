@@ -57,6 +57,8 @@ android.arch = armeabi-v7a,arm64-v8a,x86_64
 
 # SDK
 android.sdk = 33
+android.build_tools_version = 34.0.0
+android.accept_sdk_license = True
 
 # NDK
 # android.ndk = 25b
