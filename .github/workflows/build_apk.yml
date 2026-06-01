@@ -1,0 +1,22 @@
+name: Build Android APK
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+    - uses: actions/checkout@v4
+    - run: |
+        sudo apt update -qq
+        sudo apt install -y -qq python3-pip git python3-dev ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-plugins-good openjdk-17-jdk-headless autoconf automake libtool cmake zip unzip lld
+    - run: pip install buildozer cython
+    - run: buildozer -v android debug
+    - uses: actions/upload-artifact@v4
+      with:
+        name: soda-music-apk
+        path: bin/*.apk
+        retention-days: 7
+
